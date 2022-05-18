@@ -1,16 +1,14 @@
-import React, { useRef } from "react";
+import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const Signup = () => {
-    const emailRef = useRef("");
-  const passwordRef = useRef("");
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
- 
+
   const navigate = useNavigate();
+
  
   if (loading) {
     return (
@@ -38,10 +36,9 @@ const Signup = () => {
   }
   const handleSignup = async (event) => {
     event.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    console.log(email,password)
-   
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password);
 
     await createUserWithEmailAndPassword(email, password);
   };
@@ -51,30 +48,34 @@ const Signup = () => {
       <form onSubmit={handleSignup}>
         <div className="mb-3">
           <label className="form-label">Email address</label>
-          <input required
+          <input
+            required
             type="email"
             className="form-control"
             name="email"
-            ref={emailRef}
             aria-describedby="emailHelp"
           />
         </div>
         <div className="mb-3">
           <label className="form-label">Password</label>
-          <input required   ref={passwordRef} type="password" className="form-control" name="password" />
+          <input
+            required
+            type="password"
+            className="form-control"
+            name="password"
+          />
         </div>
-        <p>
-          Already have an account?{" "}
-          <NavLink
-            to="/login"
-            className="text-danger pe-auto text-decoration-none" 
-          >
-            Please Login
-          </NavLink>
-        </p>
+        <br />
 
         <input type="submit" className="btn btn-primary px-5" value="Sign up" />
       </form>
+      <br />
+      <span>
+        Already Have an account?{" "}
+        <NavLink to="/login" className="text-primary">
+          Login
+        </NavLink>
+      </span>
     </div>
   );
 };

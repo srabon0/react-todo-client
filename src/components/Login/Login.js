@@ -1,13 +1,11 @@
-import React, { useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React from "react";
+import {  NavLink, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
   const navigate = useNavigate();
 
   let errorElement;
@@ -42,8 +40,8 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
 
     console.log(email, password);
     await signInWithEmailAndPassword(email, password);
@@ -58,7 +56,6 @@ const Login = () => {
           <input
             required
             type="email"
-            ref={emailRef}
             className="form-control"
             name="email"
             aria-describedby="emailHelp"
@@ -68,26 +65,20 @@ const Login = () => {
           <label className="form-label">Password</label>
           <input
             required
-            min="6"
-            ref={passwordRef}
             type="password"
             className="form-control"
             name="password"
           />
         </div>
         {errorElement}
-        <p>
-          Not registered yet?{" "}
-          <NavLink
-            to="/signup"
-            className="text-danger pe-auto text-decoration-none"
-          >
-            Please Sign Up
-          </NavLink>
-        </p>
 
         <input type="submit" className="btn btn-primary px-5" value="Login" />
       </form>
+      <br />
+      
+      <span>
+        Not registerd yet? <NavLink to="/signup">Sign UP</NavLink>
+      </span>
     </div>
   );
 };
