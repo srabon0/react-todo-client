@@ -41,6 +41,7 @@ function App() {
         <h1 className="text-primary">My to do App</h1>
         </div>
         <div>
+          {user && <span className="text-success fw-bold mx-3 border px-3 py-2" >{user?.email}</span>}
           {user && <button onClick={()=>handleSignout()} className="btn btn-lg btn-warning">signout</button>}
         </div>
       </div>

@@ -9,7 +9,11 @@ const Home = () => {
     data: allTask,
     refetch,
   } = useQuery("taskData", () =>
-    fetch("http://localhost:5000/tasks").then((res) => res.json())
+    fetch("http://localhost:5000/tasks",{
+        headers:{
+            authorization:`Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then((res) => res.json())
   );
   if (isLoading) {
     return (
