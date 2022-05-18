@@ -7,7 +7,7 @@ const TaskRow = ({ task, index, refetch }) => {
       "Are you sure ? you want to delete this task"
     );
     if (proceed) {
-      const url = `http://localhost:5000/delete/${id}`;
+      const url = `https://still-falls-78959.herokuapp.com/delete/${id}`;
       fetch(url, {
         method: "DELETE",
         headers: {
@@ -29,7 +29,7 @@ const TaskRow = ({ task, index, refetch }) => {
 
   const taskComplete=(id)=>{
       
-    const url = `http://localhost:5000/done/${id}`;
+    const url = `https://still-falls-78959.herokuapp.com/done/${id}`;
     fetch(url, {
       method: "PUT",
       headers: {

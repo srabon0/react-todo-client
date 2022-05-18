@@ -24,7 +24,7 @@ const Login = () => {
   }
 
   if (user) {
-    const url = "http://localhost:5000/login";
+    const url = "https://still-falls-78959.herokuapp.com/login";
     const email = user.user.email;
     fetch(url, {
       method: "POST",
