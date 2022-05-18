@@ -1,20 +1,19 @@
 import React, { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
-
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const navigate = useNavigate();
 
-  const navigateToSignUp = () => {
-    navigate("/signup");
-  };
-
+  let errorElement;
+  if (error) {
+    errorElement = <p className="text-danger">Error: {error?.message}</p>;
+  }
 
   if (loading) {
     return (
@@ -25,13 +24,26 @@ const Login = () => {
   }
 
   if (user) {
-    navigate("/");
+    const url = "http://localhost:5000/login";
+    const email = user.user.email;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email: email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem("accessToken", data.token);
+        navigate("/");
+      });
   }
+
   const handleLogin = async (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-
 
     console.log(email, password);
     await signInWithEmailAndPassword(email, password);
@@ -39,10 +51,12 @@ const Login = () => {
 
   return (
     <div>
+      <h1 className="fs-2 text-primary">Login</h1>
       <form onSubmit={handleLogin}>
         <div className="mb-3">
           <label className="form-label">Email address</label>
           <input
+            required
             type="email"
             ref={emailRef}
             className="form-control"
@@ -53,24 +67,26 @@ const Login = () => {
         <div className="mb-3">
           <label className="form-label">Password</label>
           <input
+            required
+            min="6"
             ref={passwordRef}
             type="password"
             className="form-control"
             name="password"
           />
         </div>
+        {errorElement}
         <p>
           Not registered yet?{" "}
-          <Link
+          <NavLink
             to="/signup"
             className="text-danger pe-auto text-decoration-none"
-            onClick={navigateToSignUp}
           >
             Please Sign Up
-          </Link>{" "}
+          </NavLink>
         </p>
 
-        <input type="submit" className="btn btn-primary" value="sign up" />
+        <input type="submit" className="btn btn-primary px-5" value="Login" />
       </form>
     </div>
   );

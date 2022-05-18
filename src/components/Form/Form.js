@@ -15,7 +15,8 @@ const Form = ({refetch}) => {
         fetch("http://localhost:5000/addtask",{
           method:"POST",
           headers:{
-            "content-type":"application/json"
+            "content-type":"application/json",
+            authorization:`Bearer ${localStorage.getItem('accessToken')}`
           },
           body:JSON.stringify(task)
   

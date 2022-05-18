@@ -12,6 +12,7 @@ const TaskRow = ({ task, index, refetch }) => {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
+          authorization:`Bearer ${localStorage.getItem('accessToken')}`
         },
       })
         .then((res) => res.json())
@@ -33,34 +34,35 @@ const TaskRow = ({ task, index, refetch }) => {
       method: "PUT",
       headers: {
         "content-type": "application/json",
+        authorization:`Bearer ${localStorage.getItem('accessToken')}`
       },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          toast("Task deleted");
+          toast("Task completed");
           refetch();
         }else{
-            toast.error("cant delete the task")
+            toast.error("Operation failed")
         }
       });
       
   }
   const { _id, title, description,status } = task;
   return (
-    <tr className={status? "text-decoration-line-through": "text-primary" }>
+    <tr className={status? "text-decoration-line-through text-success": "text-primary" }>
       <th scope="row">{index + 1}</th>
 
       <td>{title}</td>
       <td>{description}</td>
       <td>
-        <button onClick={() => handleDelete(_id)} className="btn btn-sm">
+        <button onClick={() => handleDelete(_id)} className="btn btn-sm btn-danger">
           {" "}
           Delete{" "}
         </button>
       </td>
       <td>
-        <button onClick={()=>taskComplete(_id)} className="btn btn-sm"> Complete Task </button>
+        <button onClick={()=>taskComplete(_id)} className="btn btn-sm btn-success"> Complete Task </button>
       </td>
     </tr>
   );
