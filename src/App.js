@@ -3,6 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Signup from "./components/SignUp/Signup";
+import 'react-toastify/dist/ReactToastify.css';
+
+import { ToastContainer} from 'react-toastify';
+
+
 function App() {
   return (
     <div className="container mt-5">
@@ -18,7 +23,7 @@ function App() {
       
 
    
-
+      <ToastContainer />
     </div>
   );
 }

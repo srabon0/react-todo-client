@@ -1,30 +1,28 @@
 import React from 'react';
 
-const Todos = () => {
+import TaskRow from './TaskRow';
+
+const Todos = ({allTask}) => {
+  
+
+  
     return (
         <div className='my-4'>
+          <h1>Total: {allTask.length}</h1>
            <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Actions</th>
+      <th scope="col">{"   "}</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
+    {
+      allTask.map((task,index)=><TaskRow index={index} key={task._id} task={task} ></TaskRow>)
+    }
     
   </tbody>
 </table> 

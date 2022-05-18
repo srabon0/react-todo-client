@@ -15,6 +15,7 @@ const Login = () => {
     navigate("/signup");
   };
 
+
   if (loading) {
     return (
       <div class="spinner-border" role="status">
@@ -30,6 +31,7 @@ const Login = () => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
+
 
     console.log(email, password);
     await signInWithEmailAndPassword(email, password);

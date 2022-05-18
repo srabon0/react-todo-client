@@ -1,11 +1,40 @@
 import React from "react";
-
-const Form = () => {
+import { toast } from 'react-toastify';
+const Form = ({refetch}) => {
     const handleAddTask = (event)=>{
         event.preventDefault()
         const title = event.target.title.value
         const description = event.target.description.value
-        console.log(title,description);
+        const task = {
+          title:title,
+          description:description,
+          email:"srabonemam4@gmail.com",
+          status:"undone"
+          
+        }
+        fetch("http://localhost:5000/addtask",{
+          method:"POST",
+          headers:{
+            "content-type":"application/json"
+          },
+          body:JSON.stringify(task)
+  
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.insertedId){
+            toast.success("Task Added Successfull")
+            event.target.reset()
+            refetch()
+            
+            
+
+          }else{
+            toast.error("Operation Failed")
+          }
+         
+        })
+        
 
     }
 
