@@ -1,12 +1,16 @@
 
-import Form from "./components/Form/Form";
-import Todos from './components/Todos/Todos';
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./components/Home/Home";
 function App() {
   return (
     <div className="container mt-5">
       <h1 className='text-primary'>My to do App</h1>
-      <Form></Form>
-      <Todos></Todos>
+
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        
+      </Routes>
+      
 
    
 
