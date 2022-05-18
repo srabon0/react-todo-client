@@ -1,20 +1,30 @@
-import React from 'react';
-import Form from '../Form/Form'
-import { useQuery } from 'react-query';
-import Todos from '../Todos/Todos'
+import React from "react";
+import Form from "../Form/Form";
+import { useQuery } from "react-query";
+import Todos from "../Todos/Todos";
 const Home = () => {
-    const { isLoading, error, data:allTask,refetch } = useQuery('taskData', () =>
-     fetch('http://localhost:5000/tasks').then(res =>
-       res.json()
-     )
-   )
- 
+  const {
+    isLoading,
+    error,
+    data: allTask,
+    refetch,
+  } = useQuery("taskData", () =>
+    fetch("http://localhost:5000/tasks").then((res) => res.json())
+  );
+  if (isLoading) {
     return (
-        <>
-           <Form refetch={refetch}  ></Form>
-           <Todos allTask={allTask} ></Todos>
-        </>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     );
+  }
+
+  return (
+    <>
+      <Form refetch={refetch}></Form>
+      <Todos allTask={allTask} refetch={refetch}></Todos>
+    </>
+  );
 };
 
 export default Home;

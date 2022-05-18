@@ -2,7 +2,7 @@ import React from 'react';
 
 import TaskRow from './TaskRow';
 
-const Todos = ({allTask}) => {
+const Todos = ({allTask,refetch}) => {
   
 
   
@@ -21,7 +21,7 @@ const Todos = ({allTask}) => {
   </thead>
   <tbody>
     {
-      allTask.map((task,index)=><TaskRow index={index} key={task._id} task={task} ></TaskRow>)
+      allTask.map((task,index)=><TaskRow refetch={refetch} index={index} key={task._id} task={task} ></TaskRow>)
     }
     
   </tbody>
