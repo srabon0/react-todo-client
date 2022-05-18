@@ -18,8 +18,8 @@ const Login = () => {
 
   if (loading) {
     return (
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
       </div>
     );
   }
@@ -40,22 +40,22 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleLogin}>
-        <div class="mb-3">
-          <label class="form-label">Email address</label>
+        <div className="mb-3">
+          <label className="form-label">Email address</label>
           <input
             type="email"
             ref={emailRef}
-            class="form-control"
+            className="form-control"
             name="email"
             aria-describedby="emailHelp"
           />
         </div>
-        <div class="mb-3">
-          <label class="form-label">Password</label>
+        <div className="mb-3">
+          <label className="form-label">Password</label>
           <input
             ref={passwordRef}
             type="password"
-            class="form-control"
+            className="form-control"
             name="password"
           />
         </div>
@@ -70,7 +70,7 @@ const Login = () => {
           </Link>{" "}
         </p>
 
-        <input type="submit" class="btn btn-primary" value="sign up" />
+        <input type="submit" className="btn btn-primary" value="sign up" />
       </form>
     </div>
   );

@@ -9,7 +9,7 @@ const Todos = ({allTask,refetch}) => {
     return (
         <div className='my-4'>
           <h1>Total: {allTask.length}</h1>
-           <table class="table">
+           <table className="table">
   <thead>
     <tr>
       <th scope="col">#</th>

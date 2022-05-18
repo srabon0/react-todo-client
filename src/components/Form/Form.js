@@ -9,7 +9,7 @@ const Form = ({refetch}) => {
           title:title,
           description:description,
           email:"srabonemam4@gmail.com",
-          status:"undone"
+         
           
         }
         fetch("http://localhost:5000/addtask",{
@@ -40,21 +40,21 @@ const Form = ({refetch}) => {
 
   return (
     <form onSubmit={handleAddTask}>
-      <div class="mb-3">
-        <label class="form-label">Task Title</label>
-        <input type="text" class="form-control" name="title" />
+      <div className="mb-3">
+        <label className="form-label">Task Title</label>
+        <input type="text" className="form-control" name="title" />
       </div>
-      <div class="mb-3">
-        <label class="form-label">Task Description</label>
+      <div className="mb-3">
+        <label className="form-label">Task Description</label>
         <textarea
           rows="3"
           name="description"
           type="text"
-          class="form-control"
+          className="form-control"
         />
       </div>
 
-      <input type="submit" class="btn btn-primary"  value="Add task" />
+      <input type="submit" className="btn btn-primary"  value="Add task" />
         
       
     </form>
